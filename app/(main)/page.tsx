@@ -27,7 +27,7 @@ export default function Home() {
 
           {/* right content */}
           <div className="relative top-[-5rem]">
-            <Image src="/homepage/image-1.svg" className="h-[32rem] w-[32rem] " alt="section-design" height={500} width={500} />
+            <Image src="/homepage/image-1.png" className="h-[32rem] w-[32rem] " alt="section-design" height={500} width={500} />
           </div>
         </div>
         <Image src="/homepage/section-lower-design.svg" className="absolute bottom-0 right-0 h-[20rem] z-0 " alt="section-design" height={500} width={500} />
