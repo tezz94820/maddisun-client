@@ -21,7 +21,7 @@ const socialMediaLinks = [
 
 export default function Footer() {
   return (
-    <div className="border-t-2 border-[#32B18A]">
+    <footer className="border-t-2 border-[#32B18A]">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start py-5 px-5 md:px-8 lg:px-20">
         <div className="lg:w-1/2 mx-auto">
           <Link href="/" className="flex flex-row justify-center md:justify-start gap-2">
@@ -84,6 +84,6 @@ export default function Footer() {
       <div className="flex justify-center items-center mt-5">
         <p>© 2025 Maddison healthcare</p>
       </div>
-    </div>
+    </footer>
   )
 }
