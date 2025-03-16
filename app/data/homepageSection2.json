@@ -1,0 +1,17 @@
+[
+    {
+        "icon": "/homepage/medal.svg",
+        "title": "Our Origins and Specialized Services",
+        "description": "Founded in 2018 in the bustling metropolis of Mumbai, Maddisun Ventures is a dynamic player in the field of contract manufacturing."
+    },
+    {
+        "icon": "/homepage/heart-plus.svg",
+        "title": "Manufacturing Focus",
+        "description": "We distinguish ourselves by focusing on import substitution products, strategically positioning as an alternative source for goods traditionally dependent on Imports."
+    },
+    {
+        "icon": "/homepage/checkup-list.svg",
+        "title": "Geographic Presence",
+        "description": "With lots of unique blocks, you can easily build a page without coding. Build your next website within few minutes."
+    }
+]   
