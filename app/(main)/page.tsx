@@ -1,5 +1,6 @@
 import Image from "next/image";
 import section2List from '@/app/data/homepageSection2.json';
+import section3CheckData from '@/app/data/homepageSection3.json';
 
 export default function Home() {
   return (
@@ -57,6 +58,40 @@ export default function Home() {
         </div>
         <button className="bg-[#3AA76D] text-white rounded-xl w-full lg:w-3/4 px-3 md:px-2 py-3 md:py-6 font-bold text-2xl md:text-4xl"> Trusted by 500+ clients</button>
       </section>
+
+      {/* section - 3 */}
+
+      <section className="w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_top_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
+        <div className="md:w-5/8 flex flex-col gap-8 md:gap-10 ">
+          <button className="border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">About US</button>
+          <h3 className="font-bold text-2xl md:text-4xl mt-1 md:mt-5">We deliver precision and quality in pharmaceutical ingredients, upholding the highest standards in every product.</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 flex-wrap gap-3 lg:gap-5 md:gap-10 lg:w-7/8 mt-2 md:mt-8">
+            {
+              section3CheckData.map((item, index) => (
+                <div key={index} className="flex flex-row items-center gap-2">
+                  <Image src="/homepage/checks.svg" className="h-[1.5em] w-[1.5em]" alt="checkmark" height={20} width={20} />
+                  <p className="md:text-xl text-lg font-medium leading-normal text-[#5F6980]">{item}</p>
+                </div>
+              ))
+            }
+          </div>
+          <button className="flex flex-row gap-1 items-center cursor-pointer">
+            <p className="text-[#F39424] font-semibold text-lg md:text-xl underline underline-offset-4 leading-normal">Get to Know Us</p>
+            <Image src="/homepage/arrow-right.svg" className="h-[1.5em] w-[1.5em]" alt="right arrow symbol" width={10} height={10} />
+          </button>
+        </div>
+        <Image src="/homepage/image-3.png" className="border-2 hidden md:block h-[30rem] lg:h-[38rem] w-auto" alt="bottle of tablets" height={500} width={500} />
+      </section>
+
+      {/* section - 4 */}
+      {/* <section className="w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_top_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10 border ">
+        <Image src="/homepage/section4Design.svg" className="absolute h-[10rem] md:h-[15rem] lg:h-[20rem] w-[40rem] z-0 border-2" alt="section-design" height={500} width={500} />
+        
+        <div className="absolute flex flex-col gap-10 ">
+          <button className="border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">About US</button>
+          <p>p1</p>
+        </div>
+      </section> */}
     </div>
   );
 }
