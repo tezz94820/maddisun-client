@@ -84,14 +84,15 @@ export default function Home() {
       </section>
 
       {/* section - 4 */}
-      {/* <section className="w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_top_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10 border ">
-        <Image src="/homepage/section4Design.svg" className="absolute h-[10rem] md:h-[15rem] lg:h-[20rem] w-[40rem] z-0 border-2" alt="section-design" height={500} width={500} />
+      <section className="relative w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10 border">
+        <Image src="/homepage/section4Design.svg" className=" hidden md:block absolute h-[10rem] md:h-[15rem] lg:h-[20rem] w-[30rem] z-0 border border-black left-[-2.5rem] lg:left-0 bottom-1/5" alt="section-design" height={500} width={500} />
         
-        <div className="absolute flex flex-col gap-10 ">
-          <button className="border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">About US</button>
-          <p>p1</p>
+        <div className="flex flex-col sm:items-center gap-6 md:gap-10 mx-auto z-10">
+          <button className="border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">Our Milestones</button>
+          <p className="font-bold text-3xl md:text-5xl sm:text-center">Step into the Maddissun Experience</p>
+          <p className="lg:w-3/4 text-[#5F6980] md:text-center font-normal text-lg">At Maddisun Ventures, our unwavering dedication to producing top-quality Active Pharmaceutical Ingredients and Intermediates is reflected in our significant achievements. From industry accolades to glowing testimonials, each milestone underscores our commitment to excellence</p>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }
