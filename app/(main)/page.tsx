@@ -84,13 +84,31 @@ export default function Home() {
       </section>
 
       {/* section - 4 */}
-      <section className="relative w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10 ">
+      <section className="relative w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
         <Image src="/homepage/section4Design.svg" className=" hidden md:block absolute h-[10rem] md:h-[15rem] lg:h-[20rem] w-[30rem] z-0 left-[-2.5rem] lg:left-0 bottom-1/5" alt="section-design" height={500} width={500} />
-        
+
         <div className="flex flex-col sm:items-center gap-6 md:gap-10 mx-auto z-10">
           <button className="border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">Our Milestones</button>
           <p className="font-bold text-3xl md:text-5xl sm:text-center">Step into the Maddissun Experience</p>
           <p className="lg:w-3/4 text-[#5F6980] md:text-center font-normal text-lg">At Maddisun Ventures, our unwavering dedication to producing top-quality Active Pharmaceutical Ingredients and Intermediates is reflected in our significant achievements. From industry accolades to glowing testimonials, each milestone underscores our commitment to excellence</p>
+        </div>
+      </section>
+
+      {/* section-5 */}
+
+      <section className="relative w-full h-fit flex flex-col md:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_top_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
+        <button className="md:hidden border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">Insights from Our CEO</button>
+        <Image src="/homepage/image-4.png" className="w-full h-auto md:h-[24rem] md:w-[20rem] lg:h-[24rem] lg:w-[24rem] rounded-4xl" alt="CEO image" height={1000} width={1000} />
+        <div className="flex flex-col gap-5 lg:gap-10">
+          <button className="hidden md:block border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">Insights from Our CEO</button>
+          <div className="flex flex-col gap-3">
+            <h3 className="font-bold text-3xl tracking-tighter">Innovation is the cornerstone of our strategy.</h3>
+            <p className="text-lg">Our goal isn’t just to keep up with industry standards, but to set them. With a focus on pioneering solutions, we ensure our clients stay at the forefront of the pharmaceutical ingredients landscape.</p>
+          </div>
+          <button className="flex flex-row gap-1 items-center cursor-pointer">
+            <p className="text-[#F39424] font-semibold text-lg md:text-xl underline underline-offset-4 leading-normal">Get to Know Us</p>
+            <Image src="/homepage/right-up-arrow.svg" className="h-[1.5em] w-[1.5em]" alt="right arrow symbol" width={10} height={10} />
+          </button>
         </div>
       </section>
     </div>
