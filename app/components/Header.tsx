@@ -29,7 +29,7 @@ const navLinks = [
 export default function Header() {
     return (
         <nav className="flex flex-row justify-between items-center py-2 px-4 lg:px-10 shadow-md shadow-[#32B18A] sticky top-0 bg-white z-50">
-            <Link  href="/" className="flex flex-row gap-2"> 
+            <Link  href="/" className="flex flex-row gap-2 cursor-pointer"> 
                 <Image className="h-12 w-12 lg:h-15 lg:w-15" src="/logo.svg" alt="Maddisun Logo" width={50} height={50} />
                 <div className="leading-none tracking-normal text-[#32B18A] space-y-0" >
                     <h4 className="font-bold text-lg lg:text-2xl">Maddisun</h4>
@@ -39,7 +39,7 @@ export default function Header() {
             <div className="hidden sm:flex flex-row justify-between sm:gap-4 lg:gap-6 text-[#5F6980] sm:text-lg lg:text-xl font-normal ">
                 {
                     navLinks.map((link, index) => (
-                        <Link href={link.url} key={index} className="min-w-max whitespace-nowrap hover:text-[#F69220] active:text-[#F69220]">{link.title}</Link>
+                        <Link href={link.url} key={index} className="min-w-max whitespace-nowrap hover:text-[#F69220] active:text-[#F69220] cursor-pointer">{link.title}</Link>
                     ))
                 }
             </div>
