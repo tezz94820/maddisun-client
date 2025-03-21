@@ -1,0 +1,18 @@
+[
+    {
+        "id":"1",
+        "icon": "/homepage/testimonials/logo1.png",
+        "title": "Emcure pharma", 
+        "tagLine": "Best-in-class",
+        "stars": 4.5, 
+        "content": "Maddisun Ventures' dedication to producing top-quality Active Pharmaceutical Ingredients and Intermediates has impressed me greatly. Their collaboration with industry professionals ensures seamless and integrated solutions. It's a pleasure to partner with a team so committed to excellence."
+    }, 
+    {
+        "id":"2",
+        "icon": "/homepage/testimonials/logo1.png",
+        "title": "Emcure pharma", 
+        "tagLine": "Best-in-class",
+        "stars": 3.5, 
+        "content": "Maddisun Ventures' dedication to producing top-quality Active Pharmaceutical Ingredients and Intermediates has impressed me greatly. Their collaboration with industry professionals ensures seamless and integrated solutions. It's a pleasure to partner with a team so committed to excellence."
+    }
+]

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import section2List from '@/app/data/homepageSection2.json';
 import section3CheckData from '@/app/data/homepageSection3.json';
+import TestimonialCard from "../components/TestimonialCard/TestimonialCard";
+import testimonialData from "@/app/data/homepageTestimonialData.json";
 
 export default function Home() {
   return (
@@ -109,6 +111,48 @@ export default function Home() {
             <p className="text-[#F39424] font-semibold text-lg md:text-xl underline underline-offset-4 leading-normal">Get to Know Us</p>
             <Image src="/homepage/right-up-arrow.svg" className="h-[1.5em] w-[1.5em]" alt="right arrow symbol" width={10} height={10} />
           </button>
+        </div>
+      </section>
+
+      {/* section-6 */}
+      <section className="relative w-full h-fit flex flex-col lg:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_top_left,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
+        
+        <div className="relative lg:hidden h-fit w-full">
+          <Image src="/homepage/world-map.svg" className="right-0 top-0 z-0 " alt="world map" height={1000} width={1000} />
+          <div className=" absolute top-1/2 left-0 flex justify-center my-auto z-10 w-full">
+            <p className=" z-10 text-[#5F6980] font-bold text-xl md:text-4xl text-center ">with services in over 10+ countries</p>             
+          </div>
+        </div>
+        
+        <Image src="/homepage/world-map.svg" className="hidden lg:block md:absolute right-0 top-0 z-0" alt="world map" height={1000} width={1000} />
+        
+        <div className="flex flex-col gap-5 z-10 w-full">
+
+          <div className="md:text-center flex flex-col gap-4">
+            <h3 className="text-2xl md:text-5xl font-bold">Experience the Maddisun Advantage</h3>
+            <p className="text-[#4B4B4B] text-lg md:text-xl font-medium">Explore How Maddisun Ventures Is Transforming Lives</p>
+          </div>
+
+          <div className="flex flex-row justify-between items-center mt-5">
+            <div className="flex flex-col gap-10 ">
+              {
+                testimonialData.map(item => (
+                  <TestimonialCard
+                    key={item.id}
+                    icon={item.icon}
+                    title={item.title}
+                    tagLine={item.tagLine}
+                    stars={item.stars}
+                    content={item.content}
+                  />
+                ))
+              }
+            </div>
+            <div className="hidden lg:block h-max w-fit text-center">
+              <p className="font-semibold text-xl ">with services in over</p>
+              <p className="font-bold text-4xl ">10+ countries</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
