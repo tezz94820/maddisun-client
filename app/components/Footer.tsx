@@ -55,7 +55,7 @@ export default function Footer() {
               <h3 className="font-bold">Company</h3>
               <p className="hover:underline cursor-pointer">Home</p>
               <p className="hover:underline cursor-pointer">About Us</p>
-              <p className="hover:underline cursor-pointer">Testimonial</p>
+              <Link href="#testimonial-section" className="hover:underline cursor-pointer">Testimonial</Link>
             </div>
             <div className="flex flex-col gap-3">
               <h3 className="font-bold ">Resource</h3>

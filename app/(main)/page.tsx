@@ -3,10 +3,11 @@ import section2List from '@/app/data/homepageSection2.json';
 import section3CheckData from '@/app/data/homepageSection3.json';
 import TestimonialCard from "../components/TestimonialCard/TestimonialCard";
 import testimonialData from "@/app/data/homepageTestimonialData.json";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="relative flex flex-col items-center justify-center ">
 
       {/* section - 1 */}
       <section className="relative bg-[radial-gradient(circle_at_top_right,_#DCF5EC_0%,_transparent_50%)] h-[36rem] md:h-[38rem] lg:h-[40rem] w-full">
@@ -169,6 +170,16 @@ export default function Home() {
           </button>
         </div>
       </section>
+
+
+      {/* section-8 */}
+      {/* watsapp-logo section */}
+      <div className="absolute">
+        <Link href="https://wa.me/919870563634?text=I'm%20interested%20in%20Maddisun%20Healthcare" target="_blank" rel="noopener noreferrer">
+          <Image src="/homepage/watsapp-logo.svg" className="h-[6rem] w-[6rem] right-0 bottom-0 z-100 fixed " alt="watsapp-logo" height={100} width={100} />
+        </Link>      
+      </div>
+
     </div>
   );
 }
