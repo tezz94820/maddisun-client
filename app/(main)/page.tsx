@@ -115,7 +115,7 @@ export default function Home() {
       </section>
 
       {/* section-6 */}
-      <section className="relative w-full h-fit flex flex-col lg:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_top_left,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
+      <section id="testimonial-section" className="relative w-full h-fit flex flex-col lg:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_top_left,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
 
         <div className="relative lg:hidden h-fit w-full">
           <Image src="/homepage/world-map.svg" className="right-0 top-0 z-0 " alt="world map" height={1000} width={1000} />

@@ -18,7 +18,7 @@ const navLinks = [
     },
     {
         title: "Testimonials",
-        url: "#"
+        url: "#testimonial-section"
     },
     {
         title: "Blogs",
@@ -39,7 +39,7 @@ export default function Header() {
             <div className="hidden sm:flex flex-row justify-between sm:gap-4 lg:gap-6 text-[#5F6980] sm:text-lg lg:text-xl font-normal ">
                 {
                     navLinks.map((link, index) => (
-                        <button key={index} className="min-w-max whitespace-nowrap hover:text-[#F69220] active:text-[#F69220]">{link.title}</button>
+                        <Link href={link.url} key={index} className="min-w-max whitespace-nowrap hover:text-[#F69220] active:text-[#F69220]">{link.title}</Link>
                     ))
                 }
             </div>
