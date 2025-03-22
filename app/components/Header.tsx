@@ -14,7 +14,7 @@ const navLinks = [
     },
     {
         title: "Products",
-        url: "#"
+        url: "/products"
     },
     {
         title: "Testimonials",
