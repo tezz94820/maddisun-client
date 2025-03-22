@@ -25,9 +25,9 @@ export default function Products() {
                     <h2 className="text-2xl md:text-4xl font-bold lg:w-6/8">Choose form the list of finest ingredients, or search for what you need</h2>
                     <p className="text-2xl text-[#5F6980] font-semibold">How it works?</p>
                     
-                    <div className={`grid grid-cols-${steps.length} lg:w-8/9 relative`}>
+                    <div className={`flex flex-row items-center lg:w-8/9 relative`}>
                         {steps.map((step, index) => (
-                            <div key={step.id} className="flex flex-row items-center cursor-pointer gap-1 md:gap-4" onClick={() => setActiveStep(step.id)} >
+                            <div key={step.id} className="flex flex-row items-center cursor-pointer gap-1 md:gap-4 w-1/3" onClick={() => setActiveStep(step.id)} >
                                 <div className={`h-5 w-5 md:w-6 md:h-6 flex items-center justify-center rounded-full text-white ${activeStep === step.id ? "bg-orange-500" : "bg-gray-500"}`}>
                                     {step.id}
                                 </div>
