@@ -29,17 +29,22 @@ const productsList = [
     }
 ]
 
-const FinaliseListTab = () => {
+type SelectProductsTabProps = {
+    setActiveStep: React.Dispatch<React.SetStateAction<number>>
+}
 
+
+const FinaliseListTab = ({setActiveStep}:SelectProductsTabProps) => {
     let count = 0;
 
     return (
         <div className='w-full md:w-8/9 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 flex flex-col gap-5'>
-            <div className='flex flex-col gap-5 lg:flex-row items-center md:items-start justify-between '>
+            <div className='flex flex-col gap-5 lg:flex-row items-start justify-between '>
                 <p className='font-semibold text-base'>Deselect any that you want to remove</p>
-                <div className='flex flex-row justify-between items-center gap-4 w-full lg:w-fit '>
-                    <button className='underline cursor-pointer hover:underline-offset-2'>Go back to product selection</button>
-                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer'>Send Enquiry</button>
+                <div className='flex flex-row justify-between gap-4 w-full lg:w-fit '>
+                    <button className='underline cursor-pointer hover:underline-offset-2 text-xs md:text-base'>Go back to product selection</button>
+                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer'
+                    onClick={() => setActiveStep(3)}>Send Enquiry</button>
                 </div>
             </div>
 

@@ -82,8 +82,8 @@ export default function Products() {
                             exit={direction === "next" ? "prev" : "next"}
                             className="w-full"
                         >
-                            {activeStep === 1 && <SelectProductsTab />}
-                            {activeStep === 2 && <FinaliseListTab />}
+                            {activeStep === 1 && <SelectProductsTab setActiveStep={setActiveStep} />}
+                            {activeStep === 2 && <FinaliseListTab setActiveStep={setActiveStep} />}
                             {activeStep === 3 && <SendEnquiryTab />}
                         </motion.div>
                     </div>

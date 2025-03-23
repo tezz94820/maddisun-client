@@ -29,7 +29,11 @@ const productsList = [
     }
 ]
 
-const SelectProductsTab = () => {
+type SelectProductsTabProps = {
+    setActiveStep: React.Dispatch<React.SetStateAction<number>>
+}
+
+const SelectProductsTab = ({ setActiveStep }: SelectProductsTabProps) => {
 
     let count = 0;
 
@@ -51,7 +55,8 @@ const SelectProductsTab = () => {
                             }
                         </select>
                     </div>
-                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer'>See Selected Products &#40;{count}&#41;</button>
+                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer' 
+                        onClick={() => setActiveStep(2)}> See Selected Products &#40;{count}&#41;</button>
                 </div>
             </div>
 

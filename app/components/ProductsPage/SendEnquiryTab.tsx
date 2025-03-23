@@ -29,6 +29,7 @@ const productsList = [
     }
 ]
 
+
 const SendEnquiryTab = () => {
 
     let count = 0;
@@ -36,44 +37,25 @@ const SendEnquiryTab = () => {
     return (
         <div className='w-full md:w-8/9 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 flex flex-col gap-5'>
             <div className='flex flex-col gap-5 lg:flex-row items-center md:items-start justify-between '>
-                <p className='font-semibold text-base'>Deselect any that you want to remove</p>
+                <div>
+                    <p className='font-semibold text-sm md:text-base'>Enter the below details to send an enquiry</p>
+                    <p className='font-semibold text-xs md:text-sm text-gray-400'>Fields marked '*' are mandatory</p>
+                </div>
                 <div className='flex flex-row justify-between items-center gap-4 w-full lg:w-fit '>
-                    <button className='underline cursor-pointer hover:underline-offset-2'>Go back to product selection</button>
-                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer'>Send Enquiry</button>
+                    <button className='underline cursor-pointer hover:underline-offset-2 text-xs md:text-base '>Go back to product list</button>
+                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-sm md:text-base cursor-pointer'>Send</button>
                 </div>
             </div>
 
-            <div className='w-full h-fit'>
-                <table className='w-full p-2 border-collapse'>
-                    <thead className='hidden md:table-header-group bg-[#DCF5EC]'>
-                        <tr className='text-left'>
-                            <th className='first:rounded-l-xl last:rounded-r-xl py-2 w-1/18 ' />
-                            <th className='py-2 w-9/18'>Name</th>
-                            <th className='py-2 w-4/18'>CAS No</th>
-                            <th className='py-2 last:rounded-r-xl w-4/18'>Final Use</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            productsList.map(product => (
-                                <tr key={product.id} className='border-b border-gray-500/40 '>
-                                    <td className='w-2/18 md:1/18 text-center py-auto'>
-                                        <input type='checkbox' className='w-5 h-5 accent-[#FFA943] cursor-pointer' />
-                                    </td>
-                                    <td className='py-2 hidden md:table-cell w-17/18 md:w-9/18 text-sm font-semibold'>{product.name}</td>
-                                    <td className='py-2 hidden md:table-cell w-17/18 md:w-4/18 text-sm'>{product.casNo}</td>
-                                    <td className='py-2 hidden md:table-cell w-17/18 md:w-4/18 text-sm'>{product.endUse}</td>
-
-                                    <td className='w-16/18 md:hidden flex flex-col gap-1 p-2'>
-                                        <p className='text-sm font-semibold'>{product.name}</p>
-                                        <p className='text-sm text-gray-400'>{product.casNo}</p>
-                                        <p className='text-sm text-gray-400'>{product.endUse}</p>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
+            <div className=' '>
+                <form className='flex flex-row flex-wrap justify-between gap-2'>
+                    <input type='text' placeholder='First Name*' className='w-full md:w-[47%] my-2 px-4 py-2 border-2 rounded-md border-[#32B18A]' />
+                    <input type='text' placeholder='Last Name*' className='w-full md:w-[47%] my-2 px-4 py-2 border-2 rounded-md border-[#32B18A]' />
+                    <input type='text' placeholder='Email*' className='w-full md:w-[47%] my-2 px-4 py-2 border-2 rounded-md border-[#32B18A]' />
+                    <input type='text' placeholder='Phone Number*' className='w-full md:w-[47%] my-2 px-4 py-2 border-2 rounded-md border-[#32B18A]' />
+                    <textarea placeholder='Your message' className='my-2 w-full h-[10rem] px-4 py-2 border-2 rounded-md border-[#32B18A]' />
+                    <button type='submit' className='w-full px-2 md:px-4 py-2 bg-[#32B18A] rounded-full text-white text-xs md:text-xl cursor-pointer'>Send</button>
+                </form>
             </div>
         </div>
     )
