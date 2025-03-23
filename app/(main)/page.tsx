@@ -65,7 +65,7 @@ export default function Home() {
 
       {/* section - 3 */}
 
-      <section className="w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_top_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
+      <section id="aboutus-section" className="w-full h-fit flex flex-row items-center gap-5 bg-[radial-gradient(circle_at_top_right,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-10 py-5 md:py-10">
         <div className="md:w-5/8 flex flex-col gap-8 md:gap-10 ">
           <button className="border-2 border-[#509E49] text-[#509E49] rounded-full px-4 py-2 w-fit ">About US</button>
           <h3 className="font-bold text-2xl md:text-4xl mt-1 md:mt-5">We deliver precision and quality in pharmaceutical ingredients, upholding the highest standards in every product.</h3>

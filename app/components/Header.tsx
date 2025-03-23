@@ -10,7 +10,7 @@ const navLinks = [
     },
     {
         title: "About us",
-        url: "#"
+        url: "/#aboutus-section"
     },
     {
         title: "Products",
@@ -18,7 +18,7 @@ const navLinks = [
     },
     {
         title: "Testimonials",
-        url: "#testimonial-section"
+        url: "/#testimonial-section"
     },
     {
         title: "Blogs",
