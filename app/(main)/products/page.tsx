@@ -3,9 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import SelectProductsTab from "@/app/components/ProductsPage/SelectProductsTab";
+// import SelectProductsTab from "@/app/components/ProductsPage/SelectProductsTab";
 import ExceptionalQualityContactUsSection from "@/app/components/homepage/ExceptionalQualityContactUsSection";
 import section2List from '@/app/data/homepageSection2.json';
+import FinaliseListTab from "@/app/components/ProductsPage/FinaliseListTab";
+import SelectProductsTab from "@/app/components/ProductsPage/SelectProductsTab";
+import SendEnquiryTab from "@/app/components/ProductsPage/SendEnquiryTab";
 
 const steps = [
     { id: 1, web_label: "Select your products", mobile_label: "Select" },
@@ -13,9 +16,21 @@ const steps = [
     { id: 3, web_label: "Send enquiry", mobile_label: "Send enquiry" }
 ];
 
+const variants = {
+    next: { x: "100%", opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } },
+    prev: { x: "-100%", opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } },
+    active: { x: "0%", opacity: 1, transition: { duration: 0.8, ease: "easeInOut" } }
+};
+
 export default function Products() {
 
     const [activeStep, setActiveStep] = useState(1);
+    const [direction, setDirection] = useState("next");
+
+    const handleStepChange = (step: number) => {
+        setDirection(step > activeStep ? "next" : "prev"); 
+        setActiveStep(step);
+    };
 
     return (
         <div className="relative flex flex-col items-center w-full overflow-hidden">
@@ -30,7 +45,7 @@ export default function Products() {
 
                     <div className={`flex flex-row items-center lg:w-8/9 relative`}>
                         {steps.map((step, index) => (
-                            <div key={step.id} className="flex flex-row items-center cursor-pointer gap-1 md:gap-4 w-1/3" onClick={() => setActiveStep(step.id)} >
+                            <div key={step.id} className="flex flex-row items-center cursor-pointer gap-1 md:gap-4 w-1/3" onClick={() => handleStepChange(step.id)} >
                                 <div className={`h-5 w-5 md:w-6 md:h-6 flex items-center justify-center rounded-full text-white ${activeStep === step.id ? "bg-orange-500" : "bg-gray-500"}`}>
                                     {step.id}
                                 </div>
@@ -58,8 +73,19 @@ export default function Products() {
                         />
                         <hr className="absolute -bottom-4 h-0.5 w-full bg-gray-200 rounded z-10" />
                     </div>
-                    <div className="mt-8">
-                        <SelectProductsTab />
+                    <div className="mt-8 relative overflow-hidden">
+                        <motion.div
+                            key={activeStep} // Re-renders component when step changes
+                            variants={variants}
+                            initial={direction === "next" ? "next" : "prev"}
+                            animate="active"
+                            exit={direction === "next" ? "prev" : "next"}
+                            className="w-full"
+                        >
+                            {activeStep === 1 && <SelectProductsTab />}
+                            {activeStep === 2 && <FinaliseListTab />}
+                            {activeStep === 3 && <SendEnquiryTab />}
+                        </motion.div>
                     </div>
                 </div>
             </section>
@@ -78,21 +104,21 @@ export default function Products() {
                                     <span className={`h-5 w-5 md:w-6 md:h-6 flex items-center justify-center rounded-full text-white bg-gray-500`}>1</span>
                                     <span className="ml-1.5 font-bold text-base md:text-xl leading-normal">Select your products</span>
                                 </span>
-                                <p className="text-sm md:text-lg text-[#5F6980]">Choose API's Intermediates, Speciality ingredients of your choice</p>
+                                <span className="text-sm md:text-lg text-[#5F6980]">Choose API's Intermediates, Speciality ingredients of your choice</span>
                             </p>
                             <p>
                                 <span className="flex flex-row items-center justify-start">
                                     <span className={`h-5 w-5 md:w-6 md:h-6 flex items-center justify-center rounded-full text-white bg-gray-500`}>2</span>
                                     <span className="ml-1.5 font-bold text-base md:text-xl leading-normal">Finalise list of selected products</span>
                                 </span>
-                                <p className="text-sm md:text-lg text-[#5F6980]">Check the list of selected products</p>
+                                <span className="text-sm md:text-lg text-[#5F6980]">Check the list of selected products</span>
                             </p>
                             <p>
                                 <span className="flex flex-row items-center justify-start">
                                     <span className={`h-5 w-5 md:w-6 md:h-6 flex items-center justify-center rounded-full text-white bg-gray-500`}>3</span>
                                     <span className="ml-1.5 font-bold text-base md:text-xl leading-normal">Send Enquiry</span>
                                 </span>
-                                <p className="text-sm md:text-lg text-[#5F6980]">Enter your Email ID and send enquiry, our team will get back to you in 24 hrs</p>
+                                <span className="text-sm md:text-lg text-[#5F6980]">Enter your Email ID and send enquiry, our team will get back to you in 24 hrs</span>
                             </p>
                         </div>
                     </article>

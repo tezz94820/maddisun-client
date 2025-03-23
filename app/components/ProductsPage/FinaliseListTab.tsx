@@ -29,29 +29,17 @@ const productsList = [
     }
 ]
 
-const SelectProductsTab = () => {
+const FinaliseListTab = () => {
 
     let count = 0;
 
     return (
         <div className='w-full md:w-8/9 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 flex flex-col gap-5'>
             <div className='flex flex-col gap-5 lg:flex-row items-center md:items-start justify-between '>
-                <div className='flex flex-row items-center border-1 border-[#817e7e] rounded-lg px-2 py-1 w-full lg:w-fit'>
-                    <Image src="/products/search-icon.svg" alt="search icon" height={20} width={20} className='h-6 w-6' />
-                    <input type='text' className='px-4 border-none focus:outline-none w-full md:w-[20rem] text-xs md:text-base' placeholder="Search for a product, CAS No, End use" />
-                </div>
+                <p className='font-semibold text-base'>Deselect any that you want to remove</p>
                 <div className='flex flex-row justify-between items-center gap-4 w-full lg:w-fit '>
-                    <div className='flex flex-row items-center border border-[#817e7e] rounded-lg px-2 py-1 gap-2'>
-                        <p className='text-xs md:text-sm'>Type:</p>
-                        <select className='border-none focus:outline-none bg-transparent cursor-pointer text-xs md:text-sm' defaultValue={'API'}>
-                            {
-                                typeList.map((type) => (
-                                    <option key={type} value={type}>{type}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
-                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer'>See Selected Products &#40;{count}&#41;</button>
+                    <button className='underline cursor-pointer hover:underline-offset-2'>Go back to product selection</button>
+                    <button className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer'>Send Enquiry</button>
                 </div>
             </div>
 
@@ -67,7 +55,7 @@ const SelectProductsTab = () => {
                     </thead>
                     <tbody>
                         {
-                            productsList.map( product => (
+                            productsList.map(product => (
                                 <tr key={product.id} className='border-b border-gray-500/40 '>
                                     <td className='w-2/18 md:1/18 text-center py-auto'>
                                         <input type='checkbox' className='w-5 h-5 accent-[#FFA943] cursor-pointer' />
@@ -86,9 +74,9 @@ const SelectProductsTab = () => {
                         }
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </div>
     )
 }
 
-export default SelectProductsTab
+export default FinaliseListTab
