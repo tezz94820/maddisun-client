@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import SelectProductsTab from "@/app/components/ProductsPage/SelectProductsTab";
+import ExceptionalQualityContactUsSection from "@/app/components/homepage/ExceptionalQualityContactUsSection";
 
 const steps = [
     { id: 1, web_label: "Select your products", mobile_label: "Select" },
@@ -15,9 +17,9 @@ export default function Products() {
     const [activeStep, setActiveStep] = useState(1);
 
     return (
-        <div className="relative flex flex-col items-center justify-center w-full overflow-x-hidden">
+        <div className="relative flex flex-col items-center w-full overflow-hidden">
 
-            <section className="relative w-full h-fit flex flex-col lg:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_left,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-20 py-5 md:py-10">
+            <section className="relative w-full h-fit flex flex-col lg:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_top_left,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-20 py-5 md:py-10">
                 
                 <Image src="/products/design-top-right.svg" className="absolute -top-[3rem] -right-[3rem] md:-top-[6rem] md:-right-[5rem] h-[10rem] md:h-[15rem] lg:h-[20rem] w-auto z-0" alt="section-design" height={500} width={500} />
                 
@@ -53,10 +55,16 @@ export default function Products() {
                                 ease: "easeInOut", // Smooth easing for natural movement
                             }}
                         />
-                        <hr className="absolute -bottom-4 h-0.5 w-full bg-gray-200 rounded z-10"/>
+                        <hr className="absolute -bottom-4 h-0.5 w-full bg-gray-200 rounded z-10"/>                    
+                    </div>
+                    <div className="mt-8">
+                        <SelectProductsTab />
                     </div>
                 </div>
             </section>
+        
+            {/* section-3 */}
+            <ExceptionalQualityContactUsSection />
         </div>
     )
 }
