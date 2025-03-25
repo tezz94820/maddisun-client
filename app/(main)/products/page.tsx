@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, PanInfo } from "framer-motion";
 // import SelectProductsTab from "@/app/components/ProductsPage/SelectProductsTab";
 import ExceptionalQualityContactUsSection from "@/app/components/homepage/ExceptionalQualityContactUsSection";
 import section2List from '@/app/data/homepageSection2.json';
@@ -28,8 +28,33 @@ export default function Products() {
     const [direction, setDirection] = useState("next");
 
     const handleStepChange = (step: number) => {
-        setDirection(step > activeStep ? "next" : "prev"); 
+        setDirection(step > activeStep ? "next" : "prev");
         setActiveStep(step);
+    };
+
+
+    const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+        // Determine swipe direction based on drag velocity and direction
+        const { offset, velocity } = info;
+        
+        // Threshold for considering a swipe (adjust as needed)
+        const swipeThreshold = 100;
+        const velocityThreshold = 500;
+
+        // Swipe right (move to previous step)
+        if ((offset.x > swipeThreshold && velocity.x > velocityThreshold) || 
+            (offset.x > swipeThreshold && activeStep > 1)) {
+            if (activeStep > 1) {
+                handleStepChange(activeStep - 1);
+            }
+        } 
+        // Swipe left (move to next step)
+        else if ((offset.x < -swipeThreshold && velocity.x < -velocityThreshold) || 
+                 (offset.x < -swipeThreshold && activeStep < 3)) {
+            if (activeStep < 3) {
+                handleStepChange(activeStep + 1);
+            }
+        }
     };
 
 
@@ -81,7 +106,11 @@ export default function Products() {
                             initial={direction === "next" ? "next" : "prev"}
                             animate="active"
                             exit={direction === "next" ? "prev" : "next"}
-                            className="w-full"
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            dragElastic={0.5}
+                            onDragEnd={handleDragEnd}
+                            className="w-full cursor-grab active:cursor-grabbing"
                         >
                             {activeStep === 1 && <SelectProductsTab setActiveStep={setActiveStep} />}
                             {activeStep === 2 && <FinaliseListTab setActiveStep={setActiveStep} />}
