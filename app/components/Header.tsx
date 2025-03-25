@@ -6,7 +6,7 @@ import Link from "next/link";
 const navLinks = [
     {
         title: "Home",
-        url: "#"
+        url: "/"
     },
     {
         title: "About us",
@@ -22,7 +22,7 @@ const navLinks = [
     },
     {
         title: "Blogs",
-        url: "#"
+        url: "/blogs"
     }
 ]
 
