@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Modal from "../components/Modal";
@@ -8,6 +9,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body>
         <Providers> {/* ✅ Wrap everything inside Providers */}
           <Header />
