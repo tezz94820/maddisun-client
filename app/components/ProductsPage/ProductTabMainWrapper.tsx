@@ -7,6 +7,7 @@ import FinaliseListTab from "./FinaliseListTab";
 import SendEnquiryTab from "./SendEnquiryTab";
 import axios from "axios";
 import { ProductType, SendEnquiryFormdataType } from "@/types/product";
+import { useSearchParams } from "next/navigation";
 
 const steps = [
     { id: 1, web_label: "Select your products", mobile_label: "Select" },
@@ -32,6 +33,8 @@ const ProductTabMainWrapper = () => {
     // Get active step from local storage or default to 1
     const [activeStep, setActiveStep] = useState(1);
     const [direction, setDirection] = useState("next");
+    const searchParams = useSearchParams();
+
     
     // Initialize states from local storage if available
     const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([]);
@@ -59,6 +62,13 @@ const ProductTabMainWrapper = () => {
             }
         }
     }, []);
+
+    useEffect( () => {
+        const activeStep = searchParams.get('active-step');
+        if (activeStep) {
+            setActiveStep(Number(activeStep));
+        }
+    }, [searchParams])
     
     // Save selected products to localStorage whenever they change
     useEffect(() => {

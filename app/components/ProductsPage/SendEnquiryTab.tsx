@@ -20,6 +20,7 @@ type SendEnquiryTabProps = {
 const SendEnquiryTab = ({ setActiveStep, selectedProducts, formdata, setFormdata, clearStoredData }: SendEnquiryTabProps) => {
 
     const { openModal, closeModal } = useModal();
+    const [sendingEnquiry, setSendingEnquiry] = useState<boolean>(false);
 
     const setFormDataOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormdata({ ...formdata, [e.target.name]: e.target.value });
@@ -27,16 +28,20 @@ const SendEnquiryTab = ({ setActiveStep, selectedProducts, formdata, setFormdata
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setSendingEnquiry(true);
         try {
             const response = await axios.post('/api/enquiry', {...formdata, products: selectedProducts.map((product) => product._id)});
             if (response.status === 200) {
                 openModal(<SendEnquiryModal closeModal={closeModal} clearStoredData={clearStoredData} />);
+                clearStoredData();
             }
             else {
                 alert("Failed to send enquiry. Please try again.");
             }
+            setSendingEnquiry(false);
         } catch (error) {
-            console.log(error);
+            alert("Failed to send enquiry. Please try again.");
+            setSendingEnquiry(false);
         }
     }
 
@@ -57,7 +62,7 @@ const SendEnquiryTab = ({ setActiveStep, selectedProducts, formdata, setFormdata
                 </div>
                 <div className='flex flex-row justify-between items-center gap-4 w-full lg:w-fit '>
                     <button className='underline cursor-pointer hover:underline-offset-2 text-xs md:text-base ' onClick={() => setActiveStep(2)}>Go back to product list</button>
-                    <button type="submit" className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-sm md:text-base cursor-pointer' form='enquiry-form'>Send</button>
+                    <button type="submit" className={`px-2 md:px-4 py-1 ${  sendingEnquiry ? "bg-gray-400 cursor-not-allowed" : "bg-[#32B18A] cursor-pointer"} rounded-full text-white text-sm md:text-base`} form='enquiry-form'>{  sendingEnquiry ? "Sending..." : "Send"}</button>
                 </div>
             </div>
 
@@ -68,7 +73,7 @@ const SendEnquiryTab = ({ setActiveStep, selectedProducts, formdata, setFormdata
                     <input type='text' placeholder='Email*' name="email" className='w-full md:w-[47%] my-2 px-4 py-2 border-2 rounded-md border-[#32B18A]' required value={formdata.email} onChange={setFormDataOnChangeHandler} />
                     <input type='text' placeholder='Phone Number*' name="phone" className='w-full md:w-[47%] my-2 px-4 py-2 border-2 rounded-md border-[#32B18A]' required value={formdata.phone} onChange={setFormDataOnChangeHandler} />
                     <textarea placeholder='Your message' name="message" className='my-2 w-full h-[10rem] px-4 py-2 border-2 rounded-md border-[#32B18A]' required value={formdata.message} onChange={setFormDataOnChangeHandler} />
-                    <button type='submit' className='w-full px-2 md:px-4 py-2 bg-[#32B18A] rounded-full text-white text-xs md:text-xl cursor-pointer'>Send</button>
+                    <button type='submit' className={`w-full px-2 md:px-4 py-2 ${sendingEnquiry ? 'bg-gray-400 cursor-not-allowed': 'bg-[#32B18A] cursor-pointer'} rounded-full text-white text-xs md:text-xl`}>{sendingEnquiry ? "Sending..." : "Send"}</button>
                 </form>
             </div>
         </div>

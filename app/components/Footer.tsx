@@ -34,8 +34,8 @@ export default function Footer() {
           <p className="mt-4 lg:pr-30 text-justify">WeWork, Raheja Platinum, Sag Baug Road,Off Andheri-Kurla Road, Marol, Andheri (E),Mumbai-400059, Maharashtra, India.</p>
           <div className="hidden md:flex flex-col">
             <div className="mt-4 text-[#006B4F] flex flex-col gap-4 ">
-              <p className="underline cursor-pointer">info@maddisun.com</p>
-              <p className="cursor-pointer underline">+91&nbsp;9870563634</p>
+              <Link href="mailto:info@maddisun.com" className="underline cursor-pointer">info@maddisun.com</Link>
+              <Link href="tel:+919870563634" className="cursor-pointer underline">+91&nbsp;9870563634</Link>
             </div>
             <div className="flex flex-row gap-6 mt-4">
               {
@@ -53,23 +53,23 @@ export default function Footer() {
           <div className="flex flex-row justify-between mt-5 md:mt-10 w-3/4 mx-auto md:mx-0">
             <div className="flex flex-col gap-3">
               <h3 className="font-bold">Company</h3>
-              <p className="hover:underline cursor-pointer">Home</p>
-              <p className="hover:underline cursor-pointer">About Us</p>
-              <Link href="#testimonial-section" className="hover:underline cursor-pointer">Testimonial</Link>
+              <Link href="/" className="hover:underline cursor-pointer">Home</Link>
+              <Link href="/#aboutus-section" className="hover:underline cursor-pointer">About Us</Link>
+              <Link href="/#testimonial-section" className="hover:underline cursor-pointer">Testimonial</Link>
             </div>
             <div className="flex flex-col gap-3">
               <h3 className="font-bold ">Resource</h3>
               <p className="hover:underline cursor-pointer">FAQs</p>
-              <p className="hover:underline cursor-pointer">Blog</p>
-              <p className="hover:underline cursor-pointer">Contact Us</p>
+              <Link href="/blogs" className="hover:underline cursor-pointer">Blog</Link>
+              <Link href="/products?active-step=3" className="hover:underline cursor-pointer">Contact Us</Link>
             </div>
           </div>
         </div>
       </div>
       <div className="flex flex-col items-center md:hidden">
         <div className="mt-4 text-[#006B4F] flex flex-col gap-2 ">
-          <p className="underline cursor-pointer">info@maddisun.com</p>
-          <p className="cursor-pointer underline">+91&nbsp;9870563634</p>
+          <Link href="mailto:info@maddisun.com" className="underline cursor-pointer">info@maddisun.com</Link>
+          <Link href="tel:+919870563634" className="cursor-pointer underline">+91&nbsp;9870563634</Link>
         </div>
         <div className="flex flex-row gap-6 mt-4">
           {

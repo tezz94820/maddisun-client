@@ -44,10 +44,10 @@ export default function Header() {
                 }
             </div>
             <div className="flex flex-row justify-between items-center gap-2">
-                <button className=" h-min flex flex-row gap-1 cursor-pointer bg-[#FFA943] text-white py-1 px-2 lg:py-2 lg:px-4 rounded-full hover:underline">
+                <Link href="/products?active-step=3" className=" h-min flex flex-row gap-1 cursor-pointer bg-[#FFA943] text-white py-1 px-2 lg:py-2 lg:px-4 rounded-full hover:underline">
                     <p className="text-base lg:text-xl">Contact Us</p>
                     <Image className="h-6 w-6" src="/arrow-up-right.svg" alt="Contact Us" width={30} height={30} />
-                </button>
+                </Link>
                 <button className="sm:hidden h-fit w-fit">
                     <Image className="h-8 w-8" src="/menu.svg" alt="menu" width={30} height={30} />
                 </button>

@@ -26,10 +26,10 @@ export default function Home() {
               </div>
             </div>
             <article className="font-semibold text-xl md:text-3xl">Excellence, innovation & reliability in every pharmaceutical ingredient</article>
-            <button className="flex flex-row w-fit gap-1 cursor-pointer bg-[#FFA943] text-white py-1 px-2 md:py-2 md:px-4 rounded-lg hover:underline font-semibold text-2xl">
+            <Link href="/products" className="flex flex-row w-fit gap-1 cursor-pointer bg-[#FFA943] text-white py-1 px-2 md:py-2 md:px-4 rounded-lg hover:underline font-semibold text-2xl">
               <p className="text-lg md:text-xl">Check our products</p>
-              <Image className="h-6 w-6" src="/arrow-up-right.svg" alt="Contact Us" width={30} height={30} />
-            </button>
+              <Image className="h-6 w-6" src="/arrow-up-right.svg" alt="arrow up right" width={30} height={30} />
+            </Link>
           </div>
 
           {/* right content */}
@@ -79,10 +79,10 @@ export default function Home() {
               ))
             }
           </div>
-          <button className="flex flex-row gap-1 items-center cursor-pointer">
+          <Link href="/products?active-step=3" className="flex flex-row gap-1 items-center cursor-pointer">
             <p className="text-[#F39424] font-semibold text-lg md:text-xl underline underline-offset-4 leading-normal">Get to Know Us</p>
             <Image src="/homepage/arrow-right.svg" className="h-[1.5em] w-[1.5em]" alt="right arrow symbol" width={10} height={10} />
-          </button>
+          </Link>
         </div>
         <Image src="/homepage/image-3.png" className="border-2 hidden md:block h-[30rem] lg:h-[38rem] w-auto" alt="bottle of tablets" height={500} width={500} />
       </section>
@@ -109,10 +109,10 @@ export default function Home() {
             <h3 className="font-bold text-3xl tracking-tighter">Innovation is the cornerstone of our strategy.</h3>
             <p className="text-lg">Our goal isn’t just to keep up with industry standards, but to set them. With a focus on pioneering solutions, we ensure our clients stay at the forefront of the pharmaceutical ingredients landscape.</p>
           </div>
-          <button className="flex flex-row gap-1 items-center cursor-pointer">
+          <Link href="/products?active-step=3" className="flex flex-row gap-1 items-center cursor-pointer">
             <p className="text-[#F39424] font-semibold text-lg md:text-xl underline underline-offset-4 leading-normal">Get to Know Us</p>
             <Image src="/homepage/right-up-arrow.svg" className="h-[1.5em] w-[1.5em]" alt="right arrow symbol" width={10} height={10} />
-          </button>
+          </Link>
         </div>
       </section>
 
