@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ExceptionalQualityContactUsSection from "@/app/components/homepage/ExceptionalQualityContactUsSection";
 import ProductTabMainWrapper from "@/app/components/ProductsPage/ProductTabMainWrapper";
+import { Suspense } from "react";
 
 export default function Products() {
     return (
@@ -13,8 +14,9 @@ export default function Products() {
                 <div className="flex flex-col gap-5 z-10">
                     <h2 className="text-2xl md:text-4xl font-bold lg:w-6/8">Choose form the list of finest ingredients, or search for what you need</h2>
                     <p className="text-2xl text-[#5F6980] font-semibold">How it works?</p>
-
-                    <ProductTabMainWrapper />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <ProductTabMainWrapper />
+                    </Suspense>
                 </div>
             </section>
 
