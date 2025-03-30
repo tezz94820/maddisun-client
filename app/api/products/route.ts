@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
   }
   
   try {
-      const products = await Product.find(query);
+      const products = await Product.find(query).sort({ name: 1 });
       return NextResponse.json(products);
   } catch (error) {
       console.error("Error fetching products:", error);
