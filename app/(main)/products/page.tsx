@@ -1,63 +1,8 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
-import { motion, PanInfo } from "framer-motion";
-// import SelectProductsTab from "@/app/components/ProductsPage/SelectProductsTab";
 import ExceptionalQualityContactUsSection from "@/app/components/homepage/ExceptionalQualityContactUsSection";
-import section2List from '@/app/data/homepageSection2.json';
-import FinaliseListTab from "@/app/components/ProductsPage/FinaliseListTab";
-import SelectProductsTab from "@/app/components/ProductsPage/SelectProductsTab";
-import SendEnquiryTab from "@/app/components/ProductsPage/SendEnquiryTab";
-
-const steps = [
-    { id: 1, web_label: "Select your products", mobile_label: "Select" },
-    { id: 2, web_label: "Finalise list of selected products", mobile_label: "Finalise list" },
-    { id: 3, web_label: "Send enquiry", mobile_label: "Send enquiry" }
-];
-
-const variants = {
-    next: { x: "100%", opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } },
-    prev: { x: "-100%", opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } },
-    active: { x: "0%", opacity: 1, transition: { duration: 0.8, ease: "easeInOut" } }
-};
+import ProductTabMainWrapper from "@/app/components/ProductsPage/ProductTabMainWrapper";
 
 export default function Products() {
-
-    const [activeStep, setActiveStep] = useState(1);
-    const [direction, setDirection] = useState("next");
-
-    const handleStepChange = (step: number) => {
-        setDirection(step > activeStep ? "next" : "prev");
-        setActiveStep(step);
-    };
-
-
-    const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-        // Determine swipe direction based on drag velocity and direction
-        const { offset, velocity } = info;
-        
-        // Threshold for considering a swipe (adjust as needed)
-        const swipeThreshold = 100;
-        const velocityThreshold = 500;
-
-        // Swipe right (move to previous step)
-        if ((offset.x > swipeThreshold && velocity.x > velocityThreshold) || 
-            (offset.x > swipeThreshold && activeStep > 1)) {
-            if (activeStep > 1) {
-                handleStepChange(activeStep - 1);
-            }
-        } 
-        // Swipe left (move to next step)
-        else if ((offset.x < -swipeThreshold && velocity.x < -velocityThreshold) || 
-                 (offset.x < -swipeThreshold && activeStep < 3)) {
-            if (activeStep < 3) {
-                handleStepChange(activeStep + 1);
-            }
-        }
-    };
-
-
     return (
         <div className="relative flex flex-col items-center w-full overflow-hidden">
 
@@ -69,54 +14,7 @@ export default function Products() {
                     <h2 className="text-2xl md:text-4xl font-bold lg:w-6/8">Choose form the list of finest ingredients, or search for what you need</h2>
                     <p className="text-2xl text-[#5F6980] font-semibold">How it works?</p>
 
-                    <div className={`flex flex-row items-center lg:w-8/9 relative`}>
-                        {steps.map((step, index) => (
-                            <div key={step.id} className="flex flex-row items-center cursor-pointer gap-1 md:gap-4 w-1/3" onClick={() => handleStepChange(step.id)} >
-                                <div className={`h-5 w-5 md:w-6 md:h-6 flex items-center justify-center rounded-full text-white ${activeStep === step.id ? "bg-orange-500" : "bg-gray-500"}`}>
-                                    {step.id}
-                                </div>
-                                <span className={`hidden lg:block mt-1 text-sm align-middle ${activeStep === step.id ? "font-semibold text-black" : "text-gray-500"}`}>
-                                    {step.web_label}
-                                </span>
-                                <span className={`lg:hidden mt-1 text-sm align-middle ${activeStep === step.id ? "font-semibold text-black" : "text-gray-500"}`}>
-                                    {step.mobile_label}
-                                </span>
-                            </div>
-                        ))}
-
-                        {/* Animated Underline */}
-                        <motion.div
-                            className="absolute -bottom-4 h-1 bg-orange-500 rounded transition-all z-20"
-                            initial={{ x: "0%", width: "20%" }} // Start at first step
-                            animate={{
-                                x: `${(activeStep - 1) * 100}%`, // Move by 100% of width per step
-                                width: "33.33%", // Keep width consistent
-                            }}
-                            transition={{
-                                duration: 0.4, // Controls the speed of animation
-                                ease: "easeInOut", // Smooth easing for natural movement
-                            }}
-                        />
-                        <hr className="absolute -bottom-4 h-0.5 w-full bg-gray-200 rounded z-10" />
-                    </div>
-                    <div className="mt-8 relative overflow-hidden">
-                        <motion.div
-                            key={activeStep} // Re-renders component when step changes
-                            variants={variants}
-                            initial={direction === "next" ? "next" : "prev"}
-                            animate="active"
-                            exit={direction === "next" ? "prev" : "next"}
-                            drag="x"
-                            dragConstraints={{ left: 0, right: 0 }}
-                            dragElastic={0.5}
-                            onDragEnd={handleDragEnd}
-                            className="w-full cursor-grab active:cursor-grabbing"
-                        >
-                            {activeStep === 1 && <SelectProductsTab setActiveStep={setActiveStep} />}
-                            {activeStep === 2 && <FinaliseListTab setActiveStep={setActiveStep} />}
-                            {activeStep === 3 && <SendEnquiryTab />}
-                        </motion.div>
-                    </div>
+                    <ProductTabMainWrapper />
                 </div>
             </section>
 

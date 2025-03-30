@@ -1,6 +1,4 @@
 import Head from "next/head";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import Modal from "../components/Modal";
 import Providers from "../providers/providers";
 
@@ -14,9 +12,7 @@ export default function RootLayout({
       </Head>
       <body>
         <Providers> 
-          <Header />
           <main>{children}</main>
-          <Footer />
           <Modal /> 
         </Providers>
       </body>
