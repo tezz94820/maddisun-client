@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import SendEnquiryModal from './SendEnquiryModal';
+import axios from 'axios';
 
 type SendEnquiryTabProps = {
     setActiveStep: React.Dispatch<React.SetStateAction<number>>
@@ -20,21 +21,30 @@ const SendEnquiryTab = ({ setActiveStep, selectedProducts, formdata, setFormdata
 
     const { openModal, closeModal } = useModal();
 
-    const setFormDataOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+    const setFormDataOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormdata({ ...formdata, [e.target.name]: e.target.value });
     }
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        openModal(<SendEnquiryModal closeModal={closeModal} clearStoredData={clearStoredData}/>);
+        try {
+            const response = await axios.post('/api/enquiry', {...formdata, products: selectedProducts.map((product) => product._id)});
+            if (response.status === 200) {
+                openModal(<SendEnquiryModal closeModal={closeModal} clearStoredData={clearStoredData} />);
+            }
+            else {
+                alert("Failed to send enquiry. Please try again.");
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
-        const message = `Hi,\nI am looking to enquire about the following products :- \n${
-            selectedProducts.map((product, index) => {
-                return `\n${index + 1}.\tName: ${product.name}\nCAS No: (${product.cas_no})\nQty: (Please enter kg/gm/ton)\n`
-            }).join('')
-        }\nRegards,\n${formdata.first_name} ${formdata.last_name}`;
+        const message = `Hi,\nI am looking to enquire about the following products :- \n${selectedProducts.map((product, index) => {
+            return `\n${index + 1}.\tName: ${product.name}\nCAS No: (${product.cas_no})\nQty: (Please enter kg/gm/ton)\n`
+        }).join('')
+            }\nRegards,\n${formdata.first_name} ${formdata.last_name}`;
         setFormdata({ ...formdata, message });
     }, [formdata.first_name, formdata.last_name])
 
