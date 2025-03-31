@@ -15,3 +15,13 @@ export const EnquirySchema = z.object({
   message: z.string().optional(),
   products: z.array(z.string()).optional(),
 });
+
+export const BlogSchema = z.object({
+  title: z.string().min(1, "Blog title is required."),
+  category: z.string().min(1, "Blog category is required."),
+  link: z.string().url("Valid URL is required.").min(1, "Blog link is required."),
+  date: z.coerce.date({
+    required_error: "Date is required.",
+    invalid_type_error: "Date must be a valid date format."
+  })
+});
