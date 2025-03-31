@@ -1,3 +1,4 @@
+import { connectDB } from "@/app/lib/mongodb";
 import { EnquirySchema } from "@/app/lib/validation";
 import { Enquiry } from "@/app/models/Enquiry";
 import mongoose from "mongoose";
@@ -7,6 +8,8 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
     try {
+        await connectDB();
+
         const body = await req.json();
 
         //validating the request body using zod
@@ -133,5 +136,85 @@ export async function POST(req: Request) {
         if (error instanceof Error) {
             return NextResponse.json({ error: error.message }, { status: 400 });
         }
+    }
+}
+
+
+export async function GET(req: Request) {
+    try {
+        await connectDB();
+        
+        const { searchParams } = new URL(req.url);
+        const filter = searchParams.get('filter');
+        const customDate = searchParams.get('date');
+
+        // Prepare the query filter
+        let dateFilter = {};
+
+        if (filter === 'today') {
+            // Get today's start and end (in user's timezone)
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            dateFilter = {
+                createdAt: {
+                    $gte: today,
+                    $lt: tomorrow
+                }
+            };
+        } else if (filter === 'yesterday') {
+            // Get yesterday's start and end
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            yesterday.setHours(0, 0, 0, 0);
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            dateFilter = {
+                createdAt: {
+                    $gte: yesterday,
+                    $lt: today
+                }
+            };
+        } else if (customDate) {
+            // For custom date filter
+            const selectedDate = new Date(customDate);
+            selectedDate.setHours(0, 0, 0, 0);
+
+            const nextDay = new Date(selectedDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+
+            dateFilter = {
+                createdAt: {
+                    $gte: selectedDate,
+                    $lt: nextDay
+                }
+            };
+        }
+
+        // Fetch enquiries with the date filter
+        const enquiries = await Enquiry.find(dateFilter)
+            .sort({ createdAt: -1 })
+            .lean();
+
+        // Return the enquiries as JSON
+        return NextResponse.json(enquiries);
+    } catch (error) {
+        console.error("Error fetching enquiries:", error);
+
+        if (error instanceof Error) {
+            return NextResponse.json(
+                { error: "Failed to fetch enquiries: " + error.message },
+                { status: 500 }
+            );
+        }
+
+        return NextResponse.json(
+            { error: "An unknown error occurred while fetching enquiries" },
+            { status: 500 }
+        );
     }
 }
