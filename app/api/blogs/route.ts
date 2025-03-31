@@ -1,5 +1,5 @@
 import { connectDB } from '@/app/lib/mongodb';
-import { BlogSchema } from '@/app/lib/validation';
+import { BlogSchema, BlogUpdateSchema } from '@/app/lib/validation';
 import { Blog } from '@/app/models/Blog';
 import mongoose from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
@@ -124,5 +124,90 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
     return NextResponse.json({ error: "Failed to delete blog" }, { status: 500 });
+  }
+}
+
+
+
+
+// PUT to update an existing blog
+export async function PUT(req: Request) {
+  try {
+    await connectDB();
+    
+    const body = await req.json();
+    console.log(body);
+    // Validate input with Zod
+    const { _id:id, title, category, link, pinned, date } = BlogUpdateSchema.parse(body);
+    
+    // Validate if the id is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid blog ID format" }, { status: 400 });
+    }
+    
+    // Check for duplicate title (excluding the current blog)
+    if (title) {
+      const existingBlogWithTitle = await Blog.findOne({ 
+        title, 
+        _id: { $ne: id }
+      });
+      
+      if (existingBlogWithTitle) {
+        return NextResponse.json({ error: "Blog with this title already exists" }, { status: 400 });
+      }
+    }
+    
+    // Check for duplicate link (excluding the current blog)
+    if (link) {
+      const existingBlogWithLink = await Blog.findOne({ 
+        link, 
+        _id: { $ne: id }
+      });
+      
+      if (existingBlogWithLink) {
+        return NextResponse.json({ error: "Blog with this link already exists" }, { status: 400 });
+      }
+    }
+    
+    //check if only one blog is pinned. not 2 blogs can be pinned for a particular category.
+    if (pinned) {
+      const existingPinnedBlog = await Blog.findOne({ category:category, pinned: true });
+      if (existingPinnedBlog) {
+        return NextResponse.json({ error: "Only one blog can be pinned at a time per category" }, { status: 400 });
+      }
+    }
+
+
+    // Build update object with only provided fields
+    const updateData: any = {};
+    if (title !== undefined) updateData.title = title;
+    if (category !== undefined) updateData.category = category;
+    if (link !== undefined) updateData.link = link;
+    if (pinned !== undefined) updateData.pinned = pinned;
+    if (date !== undefined) updateData.date = new Date(date);
+    
+    // Update the blog
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+    
+    if (!updatedBlog) {
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    }
+    
+    return NextResponse.json({ 
+      message: "Blog updated successfully", 
+      blog: updatedBlog 
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'ZodError') {
+        return NextResponse.json({ error: error.message }, { status: 400 });
+      }
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Failed to update blog" }, { status: 500 });
   }
 }

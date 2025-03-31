@@ -76,3 +76,86 @@ export async function POST(req: Request) {
       }
     }
   }
+
+
+
+
+
+
+  export async function PUT(req: Request) {
+    try {
+      await connectDB();
+  
+      const body = await req.json();
+      const { _id, name, cas_no, end_use, type } = body;
+  
+      if (!_id) {
+        return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
+      }
+  
+      // Check if the product exists
+      const existingProduct = await Product.findById(_id);
+      if (!existingProduct) {
+        return NextResponse.json({ error: "Product not found" }, { status: 404 });
+      }
+  
+      // Check for duplicate name or CAS number (excluding the current product)
+      const duplicateName = await Product.findOne({ name, _id: { $ne: _id } });
+      if (duplicateName) {
+        return NextResponse.json({ error: "Product with this name already exists" }, { status: 400 });
+      }
+  
+      const duplicateCasNo = await Product.findOne({ cas_no, _id: { $ne: _id } });
+      if (duplicateCasNo) {
+        return NextResponse.json({ error: "Product with this CAS number already exists" }, { status: 400 });
+      }
+  
+      // Update the product
+      const updatedProduct = await Product.findByIdAndUpdate(
+        _id,
+        { name, cas_no, end_use, type },
+        { new: true, runValidators: true }
+      );
+  
+      return NextResponse.json({ 
+        message: "Product updated successfully", 
+        product: updatedProduct 
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        return NextResponse.json({ error: error.message }, { status: 400 });
+      }
+      return NextResponse.json({ error: "Failed to update product" }, { status: 500 });
+    }
+  }
+  
+  export async function DELETE(req: Request) {
+    try {
+      await connectDB();
+  
+      const body = await req.json();
+      const { id } = body;
+  
+      if (!id) {
+        return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
+      }
+  
+      // Check if the product exists
+      const existingProduct = await Product.findById(id);
+      if (!existingProduct) {
+        return NextResponse.json({ error: "Product not found" }, { status: 404 });
+      }
+  
+      // Delete the product
+      await Product.findByIdAndDelete(id);
+  
+      return NextResponse.json({ 
+        message: "Product deleted successfully" 
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        return NextResponse.json({ error: error.message }, { status: 400 });
+      }
+      return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
+    }
+  }

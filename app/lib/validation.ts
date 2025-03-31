@@ -25,3 +25,13 @@ export const BlogSchema = z.object({
     invalid_type_error: "Date must be a valid date format."
   })
 });
+
+
+export const BlogUpdateSchema = z.object({
+  _id: z.string().min(1, "Blog ID is required"),
+  title: z.string().min(1, "Blog title is required").optional(),
+  category: z.string().min(1, "Blog category is required").optional(),
+  link: z.string().url("Must be a valid URL").min(1, "Blog link is required").optional(),
+  pinned: z.boolean().optional(),
+  date: z.string().or(z.date()).optional(),
+});
