@@ -26,6 +26,7 @@ export default function MobileNavMenu({ navLinks, isOpen, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          onClick={onClose}
         >
           <motion.div
             className="absolute top-0 right-0 h-full w-[300px] bg-white bg-[radial-gradient(circle_at_topright,#DCF5EC_0%,_transparent_50%)] shadow-lg"
@@ -33,6 +34,7 @@ export default function MobileNavMenu({ navLinks, isOpen, onClose }) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Header with logo and close button */}
             <div className="flex justify-between items-center p-4 border-b border-gray-100">
