@@ -28,7 +28,7 @@ export default function Home() {
             <article className="font-semibold text-xl md:text-3xl">Excellence, innovation & reliability in every pharmaceutical ingredient</article>
             <Link href="/products" className="flex flex-row w-fit gap-1 cursor-pointer bg-[#FFA943] text-white py-1 px-2 md:py-2 md:px-4 rounded-lg hover:underline font-semibold text-2xl">
               <p className="text-lg md:text-xl">Check our products</p>
-              <Image className="h-6 w-6" src="/arrow-up-right.svg" alt="arrow up right" width={30} height={30} />
+              <Image className="h-7 w-7" src="/arrow-up-right.svg" alt="arrow up right" width={30} height={30} />
             </Link>
           </div>
 
