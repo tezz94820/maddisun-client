@@ -7,7 +7,7 @@ export default function Products() {
     return (
         <div className="relative flex flex-col items-center w-full overflow-hidden">
 
-            <section className="relative w-full h-fit flex flex-col lg:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_top_left,_#DCF5EC_0%,_transparent_50%)] px-5 md:px-8 lg:px-20 py-5 md:py-10">
+            <section className="relative w-full h-fit flex flex-col lg:flex-row gap-8 lg:gap-20 bg-[radial-gradient(circle_at_top_left,_#DCF5EC_0%,_transparent_10%)] px-5 md:px-8 lg:px-20 py-5 md:py-10">
 
                 <Image src="/products/design-top-right.svg" className="absolute -top-[3rem] -right-[3rem] md:-top-[6rem] md:-right-[5rem] h-[10rem] md:h-[15rem] lg:h-[20rem] w-auto z-0" alt="section-design" height={500} width={500} />
 
