@@ -5,12 +5,10 @@ const ProductSchema = new Schema({
     name: {
         type: String,
         required: [true, "Product name is required."],
-        unique: true
     },
     cas_no: {
         type: String,
         required: [true, "Product CAS No is required."],
-        unique: true
     },
     end_use: {
         type: String,
@@ -19,7 +17,16 @@ const ProductSchema = new Schema({
     type: {
         type: String,
         required: [true, "Product type is required."]
-    }
+    },
+    // category: {
+    //     type: String,
+    //     required: [true, "Product category is required."]
+    // },
+    // index: {
+    //     type: Number,
+    //     required: false
+
+    // }
 }, { timestamps: true });
 
 

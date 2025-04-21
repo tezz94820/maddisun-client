@@ -63,7 +63,7 @@ export default function createProduct() {
             <option value="">Select Type</option>
             <option value="Intermediates">Intermediates</option>
             <option value="API">API</option>
-            <option value="Unknown">Unknown</option>
+            <option value="Specialty Chemicals">Specialty Chemicals</option>
           </select>
 
           <button type="submit" className="my-4 border-2 border-[#FFA943] hover:bg-[#FFA943] hover:text-white rounded-full text-xl transition-all duration-200 cursor-pointer ">Submit</button>

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
-const typeList = ["All", "Intermediates", "API", "Unknown"];
+const typeList = ["All", "Intermediates", "API", "Specialty Chemicals"];
 
 type SelectProductsTabProps = {
     setActiveStep: React.Dispatch<React.SetStateAction<number>>
@@ -12,12 +12,17 @@ type SelectProductsTabProps = {
     setSelectedProducts: React.Dispatch<React.SetStateAction<ProductType[]>>
 }
 
+type ProductsByCategory = {
+    category: string;
+    products: ProductType[];
+}[];
+
 const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProducts }: SelectProductsTabProps) => {
-    const [products, setProducts] = useState<ProductType[]>([]);
+    const [productsByCategory, setProductsByCategory] = useState<ProductsByCategory>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedType, setSelectedType] = useState<string>('All');
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    
+
     // Debounce function
     const debounce = (func: Function, delay: number) => {
         let timeoutId: NodeJS.Timeout;
@@ -41,26 +46,26 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
         setIsLoading(true);
         try {
             let url = "/api/products";
-            
+
             // Build query parameters
             const params = new URLSearchParams();
-            
+
             if (type) {
                 params.append('type', type);
             }
-            
+
             if (search && search.trim() !== '') {
                 params.append('search', search);
             }
-            
+
             // Add query parameters to URL if they exist
             if (params.toString()) {
                 url = `${url}?${params.toString()}`;
             }
-            
+
             const response = await axios.get(url);
             const data = response.data;
-            setProducts(data);
+            setProductsByCategory(data);
         } catch (error) {
             console.error("Error fetching products:", error);
         } finally {
@@ -82,7 +87,7 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
         setSearchTerm(value);
         debouncedSearch(value);
     };
-    
+
     const handleFilterSelection = (productType: string) => {
         setSelectedType(productType);
         fetchProducts(productType, searchTerm);
@@ -120,7 +125,7 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
 
     // Loading skeleton row component
     const SkeletonRow = ({ index }: { index: number }) => (
-        <motion.tr 
+        <motion.tr
             className='border-b border-gray-500/40'
             variants={skeletonPulse}
             initial="initial"
@@ -149,37 +154,37 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
     );
 
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             className='w-full md:w-8/9 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 flex flex-col gap-5'
         >
             <div className='flex flex-col gap-5 lg:flex-row items-center md:items-start justify-between'>
-                <motion.div 
+                <motion.div
                     initial={{ scale: 0.95 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.3 }}
                     className='flex flex-row items-center border-1 border-[#817e7e] rounded-lg px-2 py-1 w-full lg:w-fit'
                 >
                     <Image src="/products/search-icon.svg" alt="search icon" height={20} width={20} className='h-6 w-6' />
-                    <input 
-                        type='text' 
-                        className='px-4 border-none focus:outline-none w-full md:w-[20rem] text-xs md:text-base' 
-                        placeholder="Search for a product, CAS No, End use" 
+                    <input
+                        type='text'
+                        className='px-4 border-none focus:outline-none w-full md:w-[20rem] text-xs md:text-base'
+                        placeholder="Search for a product, CAS No, End use"
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
                 </motion.div>
                 <div className='flex flex-row justify-between items-center gap-4 w-full lg:w-fit'>
-                    <motion.div 
+                    <motion.div
                         whileHover={{ scale: 1.02 }}
                         className='flex flex-row items-center border border-[#817e7e] rounded-lg px-2 py-1 gap-2'
                     >
                         <p className='text-xs md:text-sm'>Type:</p>
-                        <select 
-                            className='border-none focus:outline-none bg-transparent cursor-pointer text-xs md:text-sm' 
-                            value={selectedType} 
+                        <select
+                            className='border-none focus:outline-none bg-transparent cursor-pointer text-xs md:text-sm'
+                            value={selectedType}
                             onChange={(e) => handleFilterSelection(e.target.value)}
                         >
                             {
@@ -189,12 +194,12 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
                             }
                         </select>
                     </motion.div>
-                    <motion.button 
+                    <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.98 }}
-                        className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer' 
+                        className='px-2 md:px-4 py-1 bg-[#32B18A] rounded-full text-white text-xs md:text-base cursor-pointer'
                         onClick={() => setActiveStep(2)}
-                    > 
+                    >
                         See Selected Products &#40;{selectedProducts.length}&#41;
                     </motion.button>
                 </div>
@@ -202,14 +207,14 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
 
             <div className='w-full h-fit'>
                 {isLoading && (
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="flex justify-center items-center mb-4"
                     >
-                        <motion.div 
-                            animate={{ 
+                        <motion.div
+                            animate={{
                                 rotate: 360,
                                 transition: { duration: 1, repeat: Infinity, ease: "linear" }
                             }}
@@ -218,8 +223,8 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
                         <span className="ml-2 text-gray-600">Loading products...</span>
                     </motion.div>
                 )}
-                
-                <table className='w-full p-2 border-collapse'>
+
+                <table className='w-full p-2 border-separate border-spacing-y-1.5'>
                     <thead className='hidden md:table-header-group bg-[#DCF5EC]'>
                         <tr className='text-left'>
                             <th className='first:rounded-l-xl last:rounded-r-xl py-2 w-1/18' />
@@ -228,40 +233,51 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
                             <th className='py-2 last:rounded-r-xl w-4/18'>Final Use</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='pt-10'>
                         {isLoading ? (
                             // Skeleton loading rows
                             Array.from({ length: 5 }).map((_, index) => <SkeletonRow key={index} index={index} />)
-                        ) : products.length > 0 ? (
-                            products.map((product, index) => (
-                                <motion.tr 
-                                    key={product._id} 
-                                    className='border-b border-gray-500/40'
-                                    variants={tableRowVariants}
-                                    initial="hidden"
-                                    animate="visible"
-                                    custom={index}
-                                    whileHover={{ backgroundColor: "#f9f9f9" }}
-                                >
-                                    <td className='w-2/18 md:1/18 text-center py-auto'>
-                                        <motion.input 
-                                            whileTap={{ scale: 1.2 }}
-                                            type='checkbox' 
-                                            className='w-5 h-5 accent-[#FFA943] cursor-pointer' 
-                                            onChange={() => handleSelectProduct(product)}
-                                            checked={selectedProducts.some(item => item._id === product._id)}
-                                        />
-                                    </td>
-                                    <td className='py-2 hidden md:table-cell w-17/18 md:w-9/18 text-sm font-semibold'>{product.name}</td>
-                                    <td className='py-2 hidden md:table-cell w-17/18 md:w-4/18 text-sm'>{product.cas_no}</td>
-                                    <td className='py-2 hidden md:table-cell w-17/18 md:w-4/18 text-sm'>{product.end_use}</td>
+                        ) : productsByCategory.length > 0 ? (
+                            productsByCategory.map((productByCategory) => (
+                                <React.Fragment key={productByCategory.category}>
+                                    <tr>
+                                        <td className='text-white bg-[#32B18A] py-2 px-4 rounded-xl font-bold' colSpan={4}>{productByCategory.category}</td>
+                                    </tr>
+                                    {
+                                        productByCategory.products.map((product, index) => (
+                                            <motion.tr
+                                                key={product._id}
+                                                className='border-b border-gray-500/40'
+                                                variants={tableRowVariants}
+                                                initial="hidden"
+                                                animate="visible"
+                                                custom={index}
+                                                whileHover={{ backgroundColor: "#f9f9f9" }}
+                                            >
+                                                <td className='w-2/18 md:1/18 text-center py-auto'>
+                                                    <motion.input
+                                                        whileTap={{ scale: 1.2 }}
+                                                        type='checkbox'
+                                                        className='w-5 h-5 accent-[#FFA943] cursor-pointer'
+                                                        onChange={() => handleSelectProduct(product)}
+                                                        checked={selectedProducts.some(item => item._id === product._id)}
+                                                    />
+                                                </td>
+                                                <td className='py-2 hidden md:table-cell w-17/18 md:w-9/18 text-sm font-semibold'>{product.name}</td>
+                                                <td className='py-2 hidden md:table-cell w-17/18 md:w-4/18 text-sm'>{product.cas_no}</td>
+                                                <td className='py-2 hidden md:table-cell w-17/18 md:w-4/18 text-sm'>{product.end_use}</td>
 
-                                    <td className='w-16/18 md:hidden flex flex-col gap-1 p-2'>
-                                        <p className='text-sm font-semibold'>{product.name}</p>
-                                        <p className='text-sm text-gray-400'>{product.cas_no}</p>
-                                        <p className='text-sm text-gray-400'>{product.end_use}</p>
-                                    </td>
-                                </motion.tr>
+                                                <td className='w-16/18 md:hidden flex flex-col gap-1 p-2'>
+                                                    <p className='text-sm font-semibold'>{product.name}</p>
+                                                    <p className='text-sm text-gray-400'>{product.cas_no}</p>
+                                                    <p className='text-sm text-gray-400'>{product.end_use}</p>
+                                                </td>
+                                            </motion.tr>
+                                        ))
+                                    }
+
+                                </React.Fragment>
+
                             ))
                         ) : (
                             <motion.tr
@@ -274,7 +290,7 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
                         )}
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </motion.div>
     )
 }
