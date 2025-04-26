@@ -4,7 +4,8 @@ export type ProductType = {
     cas_no: string,
     end_use: string,
     type: string,
-    selected: boolean
+    selected: boolean,
+    category: string
 }
 
 export type SendEnquiryFormdataType = {

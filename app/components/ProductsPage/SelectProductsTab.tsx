@@ -224,7 +224,7 @@ const SelectProductsTab = ({ setActiveStep, selectedProducts, setSelectedProduct
                     </motion.div>
                 )}
 
-                <table className='w-full p-2 border-separate border-spacing-y-1.5'>
+                <table className='w-full p-2 border-separate border-spacing-y-1'>
                     <thead className='hidden md:table-header-group bg-[#DCF5EC]'>
                         <tr className='text-left'>
                             <th className='first:rounded-l-xl last:rounded-r-xl py-2 w-1/18' />

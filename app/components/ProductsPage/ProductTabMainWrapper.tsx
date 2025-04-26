@@ -9,6 +9,12 @@ import axios from "axios";
 import { ProductType, SendEnquiryFormdataType } from "@/types/product";
 import { useSearchParams } from "next/navigation";
 
+type SelectedProductsType= {
+        category: string;
+        products: ProductType[];
+}[];
+
+
 const steps = [
     { id: 1, web_label: "Select your products", mobile_label: "Select" },
     { id: 2, web_label: "Finalise list of selected products", mobile_label: "Finalise list" },
@@ -28,6 +34,8 @@ const initialFormdata: SendEnquiryFormdataType = {
     phone: '',
     message: ''
 }
+
+
 
 const ProductTabMainWrapper = () => {
     // Get active step from local storage or default to 1

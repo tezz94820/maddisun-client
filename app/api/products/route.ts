@@ -11,9 +11,14 @@ const CACHE_DURATION = 15 * 60 * 1000;
 
 export async function GET(request: NextRequest) {
 
+  // filters from URL
+  const url = new URL(request.url);
+  const typeFilter = url.searchParams.get('type');
+  const searchTerm = url.searchParams.get('search');
+
   // Check if cache is valid
   const currentTime = Date.now();
-  if (cachedData && currentTime - lastCacheTime < CACHE_DURATION) {
+  if (cachedData && currentTime - lastCacheTime < CACHE_DURATION && typeFilter == null && searchTerm == null) {
     // Return cached data if it's still valid
     return NextResponse.json(cachedData, {
       headers: {
@@ -26,10 +31,7 @@ export async function GET(request: NextRequest) {
 
   await connectDB();
 
-  // filters from URL
-  const url = new URL(request.url);
-  const typeFilter = url.searchParams.get('type');
-  const searchTerm = url.searchParams.get('search');
+
 
   // Build query object
   let query: any = {};
