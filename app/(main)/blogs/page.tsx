@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import ExceptionalQualityContactUsSection from "@/app/components/homepage/ExceptionalQualityContactUsSection";
 import BlogCategory from "@/app/components/blogs/BlogCategory";

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import Image from "next/image";
 import section2List from '@/app/data/homepageSection2.json';
