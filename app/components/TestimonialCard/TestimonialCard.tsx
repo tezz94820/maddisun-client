@@ -1,5 +1,6 @@
 import Image from "next/image"
 import TestimonialCardStars from "./TestimonialCardStars"
+import { motion } from "framer-motion"
 
 type TestimonialProps = {
   icon: string,
@@ -10,7 +11,7 @@ type TestimonialProps = {
 }
 export default function TestimonialCard({ icon, title, tagLine, stars, content }: TestimonialProps) {
   return (
-    <div className="bg-white shadow-xl rounded-2xl p-6 border border-gray-200 lg:w-[34rem] h-fit">
+    <motion.div initial={{opacity:0, y:100}} whileInView={{opacity:1,y:0}} viewport={{once: true}} transition={{duration:1.5}} className="bg-white shadow-xl rounded-2xl p-6 border border-gray-200 lg:w-[34rem] h-fit">
       <div className="flex flex-col gap-5 ">
         <div className="flex flex-row items-center gap-2">
           <Image src={icon} className="h-14 w-14" alt="testimonial logo" height={200} width={200} />
@@ -28,6 +29,6 @@ export default function TestimonialCard({ icon, title, tagLine, stars, content }
             <p className="text-[#5F6980] text-base md:text-lg">"{content}"</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
