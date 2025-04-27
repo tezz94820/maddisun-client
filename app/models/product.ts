@@ -18,10 +18,10 @@ const ProductSchema = new Schema({
         type: String,
         required: [true, "Product type is required."]
     },
-    // category: {
-    //     type: String,
-    //     required: [true, "Product category is required."]
-    // },
+    category: {
+        type: String,
+        required: [true, "Product category is required."]
+    },
     // index: {
     //     type: Number,
     //     required: false

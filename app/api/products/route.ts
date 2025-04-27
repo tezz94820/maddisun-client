@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
   try {
     const products = await Product.aggregate([
       { $match: query }, // 1. Match the query
-      { $sort: { category: 1, end_use: 1 } }, // 2. Sort by category and then end_use
+      { $sort: { category: 1, end_use: 1, name:1 } }, // 2. Sort by category and then end_use
       {
         $group: {
           _id: "$category", // 3. Group by category

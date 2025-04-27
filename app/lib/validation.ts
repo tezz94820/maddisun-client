@@ -5,6 +5,7 @@ export const ProductSchema = z.object({
   cas_no: z.string().min(1, "Product CAS No is required."),
   end_use: z.string().min(1, "Product end use is required."),
   type: z.string().min(1, "Product type is required."),
+  category: z.string().min(1, "Product category is required."),
 });
 
 export const EnquirySchema = z.object({

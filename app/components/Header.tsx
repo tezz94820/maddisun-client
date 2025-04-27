@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MobileNavMenu from "./MobileNavMenu";
+import { usePathname, useRouter } from "next/navigation";
 
 const navLinks = [
     {
@@ -31,6 +32,18 @@ const navLinks = [
 export default function Header() {
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [activeTitle, setActiveTitle] = useState("Home");
+    const pathname = usePathname();
+
+    useEffect( () => {
+        const currentPath = pathname.split('/')[1];
+        const currentLink = navLinks.find(link => link.url.split('/')[1] === currentPath);
+        if (currentLink) {
+            setActiveTitle(currentLink.title);
+        } else {
+            setActiveTitle("Home");
+        }
+    }, [pathname])
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -47,13 +60,13 @@ export default function Header() {
                     <Image className="h-12 w-12 lg:h-15 lg:w-15" src="/logo.svg" alt="Maddisun Logo" width={50} height={50} />
                     <div className="leading-none tracking-normal text-[#32B18A] space-y-0" >
                         <h4 className="font-bold text-lg lg:text-2xl">Maddisun</h4>
-                        <h5 className="font-semibold text-xs lg:text-base mt-[-2px]">Ventures LLP</h5>
+                        <h5 className="font-bold text-base lg:text-xl mt-[-2px]">Ventures</h5>
                     </div>
                 </Link>
-                <div className="hidden sm:flex flex-row justify-between sm:gap-4 lg:gap-6 text-[#5F6980] sm:text-lg lg:text-xl font-normal ">
+                <div className="hidden sm:flex flex-row justify-between sm:gap-4 lg:gap-6 sm:text-lg lg:text-xl font-normal ">
                     {
                         navLinks.map((link, index) => (
-                            <Link href={link.url} key={index} className="min-w-max whitespace-nowrap hover:text-[#F69220] active:text-[#F69220] cursor-pointer">{link.title}</Link>
+                            <Link href={link.url} key={index}  className={`min-w-max whitespace-nowrap cursor-pointer ${ activeTitle === link.title ? 'text-[#F69220]' : 'text-black hover:text-[#F69220]'}`} >{link.title}</Link>
                         ))
                     }
                 </div>

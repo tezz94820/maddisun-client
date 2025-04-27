@@ -22,12 +22,12 @@ export default function Home() {
               <Image className="h-12 w-12 md:h-25 md:w-25 lg:h-38 lg:w-38" src="/logo.svg" alt="Maddisun Logo" width={100} height={100} />
               <div className="leading-none tracking-normal text-[#32B18A] space-y-0" >
                 <h4 className="font-bold text-lg md:text-5xl lg:text-7xl">Maddisun</h4>
-                <h5 className="font-semibold text-xs md:text-3xl lg:text-4xl">Ventures LLP</h5>
+                <h5 className="font-bold text-base md:text-3xl lg:text-5xl">Ventures</h5>
               </div>
             </div>
             <article className="font-semibold text-xl md:text-3xl">Excellence, innovation & reliability in every pharmaceutical ingredient</article>
-            <Link href="/products" className="flex flex-row w-fit gap-1 cursor-pointer bg-[#FFA943] text-white py-1 px-2 md:py-2 md:px-4 rounded-lg hover:underline font-semibold text-2xl">
-              <p className="text-lg md:text-xl">Check our products</p>
+            <Link href="/products" className="flex flex-row w-fit gap-1 cursor-pointer bg-[#FFA943] text-white py-1 px-2 md:py-2 md:px-4 rounded-lg hover:underline text-2xl">
+              <p className="text-base lg:text-xl">Check our products</p>
               <Image className="h-7 w-7" src="/arrow-up-right.svg" alt="arrow up right" width={30} height={30} />
             </Link>
           </div>

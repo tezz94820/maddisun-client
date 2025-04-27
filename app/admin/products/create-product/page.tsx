@@ -8,6 +8,7 @@ type FormType = {
   cas_no: string;
   end_use: string;
   type: string;
+  category: string;
 }
 
 export default function createProduct() {
@@ -15,7 +16,8 @@ export default function createProduct() {
     name: "",
     cas_no: "",
     end_use: "",
-    type: ""
+    type: "",
+    category: ""
   }
   const [form, setForm] = useState<FormType>(initialForm);
 
@@ -57,6 +59,9 @@ export default function createProduct() {
 
           <label htmlFor="endUse" className="mt-5 cursor-pointer">End Use</label>
           <input id="endUse" name="end_use" type="text" required value={form.end_use} onChange={onChangeHandler} placeholder="Product End Use" className="border border-gray-400 rounded-lg w-full py-1 px-2 mt-1" />
+
+          <label htmlFor="category" className="mt-5 cursor-pointer">Category</label>
+          <input id="category" name="category" type="text" required value={form.category} onChange={onChangeHandler} placeholder="Category " className="border border-gray-400 rounded-lg w-full py-1 px-2 mt-1" />
 
           <label htmlFor="type" className="mt-5 cursor-pointer">Type</label>
           <select id="type" name="type" required value={form.type} onChange={onChangeHandler} className="border border-gray-400 rounded-lg w-full py-1 px-2 mt-1">

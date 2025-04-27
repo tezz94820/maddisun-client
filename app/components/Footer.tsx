@@ -28,7 +28,7 @@ export default function Footer() {
             <Image className="h-12 w-12 md:h-15 md:w-15" src="/logo.svg" alt="Maddisun Logo" width={50} height={50} />
             <div className="leading-none tracking-normal text-[#32B18A] space-y-0" >
               <h4 className="font-bold text-lg md:text-2xl">Maddisun</h4>
-              <h5 className="font-semibold text-xs md:text-base mt-[-2px]">Ventures LLP</h5>
+              <h5 className="font-bold text-base md:text-xl mt-[-2px]">Ventures</h5>
             </div>
           </Link>
           <p className="mt-4 lg:pr-30 text-justify">WeWork, Raheja Platinum, Sag Baug Road,Off Andheri-Kurla Road, Marol, Andheri (E),Mumbai-400059, Maharashtra, India.</p>
